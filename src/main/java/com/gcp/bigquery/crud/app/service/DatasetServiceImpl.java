@@ -21,7 +21,7 @@ import com.google.cloud.bigquery.DatasetInfo;
 @SuppressWarnings("rawtypes")
 public class DatasetServiceImpl implements DatasetService {
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "static-access" })
 	@Override
 	public Document createDataset(DatasetDto datasetDto) {
 
@@ -29,10 +29,11 @@ public class DatasetServiceImpl implements DatasetService {
 
 		try {
 
-			BigQuery bigquery = BigQueryOptions.newBuilder().setProjectId("prj-ford-amp").build().getDefaultInstance()
-					.getService();
+			BigQuery bigquery = BigQueryOptions.newBuilder().setProjectId(datasetDto.getProjectId()).build()
+					.getDefaultInstance().getService();
 
-			DatasetInfo datasetInfo = DatasetInfo.newBuilder("prj-ford-amp", datasetDto.getDatasetName()).build();
+			DatasetInfo datasetInfo = DatasetInfo.newBuilder(datasetDto.getProjectId(), datasetDto.getDatasetName())
+					.build();
 
 			Dataset newDataset = bigquery.create(datasetInfo);
 			String newDatasetName = newDataset.getDatasetId().getDataset();

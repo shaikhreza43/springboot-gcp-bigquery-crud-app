@@ -10,6 +10,7 @@ package com.gcp.bigquery.crud.app.dto;
 public class DatasetDto {
 
 	private String datasetName;
+	private String projectId;
 
 	/**
 	 * @return the datasetName
@@ -26,11 +27,27 @@ public class DatasetDto {
 	}
 
 	/**
-	 * @param datasetName
+	 * @return the projectId
 	 */
-	public DatasetDto(String datasetName) {
+	public String getProjectId() {
+		return projectId;
+	}
+
+	/**
+	 * @param projectId the projectId to set
+	 */
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
+	/**
+	 * @param datasetName
+	 * @param projectId
+	 */
+	public DatasetDto(String datasetName, String projectId) {
 		super();
 		this.datasetName = datasetName;
+		this.projectId = projectId;
 	}
 
 	/**
